@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication(scanBasePackages = "com.team")
 @EntityScan(basePackages = "com.team.entity")
-@EnableJpaRepositories(basePackages = "com.team.persistance")
+@EnableJpaRepositories(basePackages = "com.team.persistence")
 public class XyzRetailApplication {
 
 	public static void main(String[] args) {

@@ -13,9 +13,8 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Product {
 	@Id
-	private int id;
-	private String stockType;
-	private double price;
-	private double taxType;
-	private int quantity;
+	private int productId;
+	private String productName;
+	private String productType;
+	private double productPrice;
 }
