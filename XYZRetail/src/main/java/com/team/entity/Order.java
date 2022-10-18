@@ -3,6 +3,8 @@ package com.team.entity;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,6 +16,8 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Order {
 	private int OrderId;
+	@ManyToMany
 	private List<Product> products;
+	@ManyToOne
 	private User user;
 }
