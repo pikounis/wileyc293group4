@@ -27,14 +27,22 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public boolean insertNewProduct(Product product) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			int rows = productDao.insertProduct(product.getProductId(), product.getProductName(), product.getProductPrice(), product.getProductQuantity(), product.getProductType());
+			if (rows > 0) 
+				return true;
+			else
+				return false;
+		} catch (Exception e){
+			return false;
+		}
+			
 	}
 
 	@Override
 	public boolean deleteProductById(int id) {
-		// TODO Auto-generated method stub
-		return false;
+		productDao.deleteById(id);
+		return true;
 	}
 
 }
