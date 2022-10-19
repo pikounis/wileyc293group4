@@ -20,9 +20,6 @@ import lombok.NoArgsConstructor;
 public class ShoppingBasket {
 	@Id
 	private int shoppingBasketId;
-	@ManyToOne
-	private User user;
-	
 	@ManyToMany
 	private List<Product> products;
 	

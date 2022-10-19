@@ -2,6 +2,7 @@ package com.team.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -19,4 +20,6 @@ public class User {
 	private boolean admin;
 	private String password;
 	private int lastOrder;
+	@OneToOne
+	private ShoppingBasket shoppingBasket;
 }
