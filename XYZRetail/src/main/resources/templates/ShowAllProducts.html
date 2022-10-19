@@ -15,13 +15,14 @@
 			<th>Name</th>
 			<th>Type</th>
 			<th>Price</th>
+			<th>Quantity</th>
 		</tr>
 		<tr th:each="product : ${products}">
-			<!--td: table data  -->
 			<td th:text="${product.productId}"></td>
 			<td th:text="${product.productName}"></td>
 			<td th:text="${product.productType}"></td>
 			<td th:text="${product.productPrice}"></td>
+			<td th:text="${product.productQuantity}"></td>
 		</tr>
 	</table>
 
