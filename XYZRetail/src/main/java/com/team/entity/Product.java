@@ -1,8 +1,11 @@
 package com.team.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,4 +22,8 @@ public class Product {
 	private double productPrice; //3
 	private int productQuantity; //4
 	private String productType; //5
+	@OneToMany(mappedBy = "product")
+	private List<OrderProduct> productOrder;
+	@OneToMany(mappedBy = "product")
+	private List<ShoppingBasketProduct> shoppingBasketProducts;
 }

@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -25,7 +26,7 @@ public class Order {
 	private User user;
 	
 	private boolean open;
-	@ManyToMany
-	private List<Product> products;
+	@OneToMany(mappedBy="order")
+	private List<OrderProduct> orderProducts;
 	
 }
