@@ -18,7 +18,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name="`Order`")
-@IdClass(OrderId.class)
 public class Order {
 	@Id
 	private int orderId;
