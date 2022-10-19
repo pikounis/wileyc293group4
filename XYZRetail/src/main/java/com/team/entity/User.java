@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 public class User {
 	@Id
 	private String username;
-	private String password;
 	private boolean admin;
+	private String password;
+	private int lastOrder;
 }

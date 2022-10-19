@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 	public boolean registerUser(User user) {
 		if (!user.getUsername().equals("")) {
 			try {
-				int rows = userDao.insertUser(user.getUsername(), user.isAdmin(), user.getPassword());
+				int rows = userDao.insertUser(user.getUsername(), user.isAdmin(), user.getPassword(), 0);
 				if (rows == 0){
 					return false;
 				} else {
@@ -37,5 +37,15 @@ public class UserServiceImpl implements UserService {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public boolean updateUserLastOrder(User user) {
+		int rows = userDao.updateLastOrder(user.getUsername(), user.getLastOrder()+1);
+		if (rows == 0){
+			return false;
+		} else {
+			return true;
+		}
 	}
 }

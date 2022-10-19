@@ -6,4 +6,5 @@ public interface UserService {
 	
 	public User loginUser(User user);
 	public boolean registerUser(User user);
+	public boolean updateUserLastOrder(User user);
 }

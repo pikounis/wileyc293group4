@@ -10,9 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team.entity.Product;
+import com.team.entity.User;
+import com.team.service.OrderService;
 import com.team.service.ProductService;
 
 @Controller
@@ -20,6 +23,8 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private OrderService orderService;
 
 	@ModelAttribute("prdTypes")
 	List<String> getProductTypes() {
@@ -114,12 +119,12 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/addProductToCart")
-	public ModelAndView addProductToCartController(HttpServletRequest request) {
+	public ModelAndView addProductToCartController(HttpServletRequest request, @SessionAttribute("user") User user) {
 		
 		int id = Integer.parseInt(request.getParameter("id"));
 		int quantity = Integer.parseInt(request.getParameter("desiredQty"));
 		Product addProd = productService.getProductById(id);
-		System.out.println(addProd);
+		orderService.addProductToOrder(user, addProd);
 		
 		ModelAndView modelAndView = new ModelAndView("Shop");
 		Collection<Product> prdList = productService.getAllProducts();
