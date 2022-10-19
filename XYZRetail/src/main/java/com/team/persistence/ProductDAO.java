@@ -16,9 +16,17 @@ public interface ProductDAO extends JpaRepository<Product, Integer>{
 	@Transactional
 	@Modifying
 	@Query(value = "insert into product values(:id,:name,:price,:qty,:type)",nativeQuery = true)
-	public int insertProduct(@Param("id") int id,@Param("name") String name,@Param("price") double price, @Param("qty") int quantity,@Param("type") String type);
+	public int insertProduct(@Param("id") int id,
+			@Param("name") String name,
+			@Param("price") double price, 
+			@Param("qty") int quantity,
+			@Param("type") String type
+	);
 
 	@Query("from product WHERE productId = :id and productQuantity >= :qty") 
-	public Product searchProductByIdAndGreaterThanProductQuantity(@Param("id") int id, @Param("qty") int quantity);
+	public Product searchProductByIdAndGreaterThanProductQuantity(
+			@Param("id") int id, 
+			@Param("qty") int quantity
+	);
 	
 }
