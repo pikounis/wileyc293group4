@@ -37,7 +37,7 @@ public class UserController {
 		}
 		else {
 			modelAndView.addObject("user", loginUser);
-			modelAndView.setViewName("Shop");
+			modelAndView.setViewName("ShopMenu");
 		}
 		return modelAndView;
 	}

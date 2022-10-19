@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -44,8 +46,13 @@ public class ProductController {
 	
 	
 	@RequestMapping("/storeMenu")
-	public ModelAndView getMenuPageController() {
+	public ModelAndView getMenuAdminPageController() {
 		return new ModelAndView("Menu");
+	}
+	
+	@RequestMapping("/shopMenu")
+	public ModelAndView getMenuUserPageController() {
+		return new ModelAndView("ShopMenu");
 	}
 
 	@RequestMapping("/saveProductPage")
@@ -95,6 +102,29 @@ public class ProductController {
 		modelAndView.addObject("products", prdList);
 		modelAndView.setViewName("ShowAllProducts");
 
+		return modelAndView;
+	}
+	
+	@RequestMapping("/shopProducts")
+	public ModelAndView getShopUserPageController() {
+		ModelAndView modelAndView = new ModelAndView("Shop");
+		Collection<Product> prdList = productService.getAllProducts();
+		modelAndView.addObject("products", prdList);
+		return modelAndView;
+	}
+	
+	@RequestMapping("/addProductToCart")
+	public ModelAndView addProductToCartController(HttpServletRequest request) {
+		
+		int id = Integer.parseInt(request.getParameter("id"));
+		int quantity = Integer.parseInt(request.getParameter("desiredQty"));
+		Product addProd = productService.getProductById(id);
+		System.out.println(addProd);
+		
+		ModelAndView modelAndView = new ModelAndView("Shop");
+		Collection<Product> prdList = productService.getAllProducts();
+		modelAndView.addObject("products", prdList);
+		modelAndView.addObject("message", "Product chosen " + addProd.getProductName() + " qty " + quantity);
 		return modelAndView;
 	}
 }

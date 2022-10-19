@@ -9,5 +9,6 @@ public interface ProductService {
 	boolean editProductById(int id);
 	boolean insertNewProduct(Product product);
 	boolean deleteProductById(int id);
+	Product getProductById(int id);
 	// ShoppingCart calculatePrice(Map<String, Integer> price);
 }
