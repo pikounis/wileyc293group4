@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 public class Product {
-	@Id
+	@Id @GeneratedValue
 	private int productId; //1
 	private String productName; //2
 	private double productPrice; //3
