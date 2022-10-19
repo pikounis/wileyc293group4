@@ -11,7 +11,8 @@ public class ShoppingBasketServiceImpl implements ShoppingBasketService {
 	private ShoppingBasketDao shoppingBasketDao;
 	@Override
 	public boolean addProductToBasket(Product product, ShoppingBasket basket) {
-		basket.getProducts().add(product);
+		//product needs to become a shoppingBasketProduct
+		basket.getShoppingBasketProducts().add(null);
 		try{
 			shoppingBasketDao.save(basket);
 		}catch (Exception e) {
@@ -22,7 +23,8 @@ public class ShoppingBasketServiceImpl implements ShoppingBasketService {
 	}
 	@Override
 	public boolean removeProductfromBasket(Product product, ShoppingBasket basket) {
-		basket.getProducts().remove(product);
+		//product needs to become a shoppingBasketProduct
+		basket.getShoppingBasketProducts().remove(null);
 		try{
 			shoppingBasketDao.save(basket);
 		}catch (Exception e) {

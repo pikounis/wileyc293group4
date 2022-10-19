@@ -22,11 +22,5 @@ public interface ProductDAO extends JpaRepository<Product, Integer>{
 			@Param("qty") int quantity,
 			@Param("type") String type
 	);
-
-	@Query("from product WHERE productId = :id and productQuantity >= :qty") 
-	public Product searchProductByIdAndGreaterThanProductQuantity(
-			@Param("id") int id, 
-			@Param("qty") int quantity
-	);
 	
 }
