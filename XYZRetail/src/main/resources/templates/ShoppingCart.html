@@ -2,13 +2,13 @@
 <html xmlns:th="https://thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Admin products</title>
+<title>Shopping cart</title>
 </head>
 <body>
 
 <h1>XYZ Retail</h1>
 <hr>
-<h4>Show All Products</h4>
+<h4 th:text="${session.user.username} + '\' shopping cart'">Your cart</h4>
 <table>
 		<tr>
 			<th>Name</th>
@@ -24,6 +24,6 @@
 		</tr>
 	</table>
 
-<a href="./storeMenu">Back to the menu</a>
+<a href="./shopMenu">Back to the menu</a>
 </body>
 </html>

@@ -11,15 +11,14 @@ import org.springframework.stereotype.Repository;
 import com.team.entity.Product;
 
 @Repository
-public interface ProductDAO extends JpaRepository<Product, Integer>{
+public interface ProductDAO extends JpaRepository<Product, String>{
 	
 	@Transactional
 	@Modifying
-	@Query(value = "insert into product values(:id,:name,:price,:qty,:type)",nativeQuery = true)
-	public int insertProduct(@Param("id") int id,
+	@Query(value = "insert into product values(:name,:price,:type)",nativeQuery = true)
+	public int insertProduct(
 			@Param("name") String name,
 			@Param("price") double price, 
-			@Param("qty") int quantity,
 			@Param("type") String type
 	);
 	

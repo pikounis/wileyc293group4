@@ -3,14 +3,19 @@ package com.team.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.team.entity.Order;
 import com.team.entity.Product;
 import com.team.entity.User;
 import com.team.persistence.OrderDAO;
 
 @Service
 public class OrderServiceImpl implements OrderService {
-	
+
+	@Override
+	public boolean addProductToOrder(User user, Product product) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	/*
 	@Autowired
 	OrderDAO orderDao;
 
@@ -43,5 +48,5 @@ public class OrderServiceImpl implements OrderService {
 		// set close = true in orderDao
 		return false;
 	}
-
+	*/
 }

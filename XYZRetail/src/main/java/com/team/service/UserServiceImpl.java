@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 	public boolean registerUser(User user) {
 		if (!user.getUsername().equals("")) {
 			try {
-				int rows = userDao.insertUser(user.getUsername(), user.isAdmin(), user.getPassword(), 0);
+				int rows = userDao.insertUser(user.getUsername(), user.isAdmin(), 0, user.getPassword());
 				if (rows == 0){
 					return false;
 				} else {

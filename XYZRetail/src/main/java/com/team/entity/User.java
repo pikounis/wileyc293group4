@@ -1,9 +1,9 @@
 package com.team.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -15,11 +15,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "LoginUser")
-public class User {
+public class User{
 	@Id
 	private String username;
 	private boolean admin;
+	private int orderNumber;
 	private String password;
-	@OneToOne
-	private ShoppingBasket shoppingBasket;
 }

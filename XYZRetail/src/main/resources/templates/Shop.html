@@ -35,21 +35,19 @@ span.td
 
 <div class="table">
 	<div class="tr">
-        <span class="td">Product ID</span>
         <span class="td">Name</span>
         <span class="td">Type</span>
         <span class="td">Price</span>
         <span class="td">Quantity</span>
     </div>
     
-	     <form th:each="product : ${products}" class="tr" action="#" th:action="@{./addProductToCart}" method="post"> 
-	        <span class="td" th:text="${product.productId}"></span>
-	        <span class="td" th:text="${product.productName}"></span>
-	        <span class="td" th:text="${product.productType}"></span>
-	        <span class="td" th:text="${product.productPrice}"></span>
-	        <span class="td" th:text="${product.productQuantity}"></span>
+	     <form th:each="prod : ${products}" class="tr" action="#" th:action="@{./addProductToCart}" method="post"> 
+	        <span class="td" th:text="${prod.product.productName}"></span>
+	        <span class="td" th:text="${prod.product.productType}"></span>
+	        <span class="td" th:text="${prod.product.productPrice}"></span>
+	        <span class="td" th:text="${prod.quantity}"></span>
 	     	<span class="td"><input type="number" step="1" name="desiredQty"/></span>
-	     	<span class="td"><input class="hidden" type="text" name="id" th:value="${product.productId}"/></span>
+	     	<span class="td"><input class="hidden" type="text" name="id" th:value="${prod.product.productName}"/></span>
 	        <span class="td"><input type="submit" value="Add to cart"></span> 
 	    </form>
 </div>

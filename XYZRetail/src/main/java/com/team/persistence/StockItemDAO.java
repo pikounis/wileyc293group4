@@ -1,7 +1,5 @@
 package com.team.persistence;
 
-import java.util.Collection;
-
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,21 +9,16 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.team.entity.Product;
-import com.team.entity.ShoppingBasketItem;
-import com.team.entity.User;
+import com.team.entity.StockItem;
 
 @Repository
-public interface ShoppingBasketDao extends JpaRepository<ShoppingBasketItem, User> {
+public interface StockItemDAO extends JpaRepository<StockItem, Product> {
 	
 	@Transactional
 	@Modifying
-	@Query(value = "insert into shoppingBasketItem values(:prod,:qty,:user)",nativeQuery = true)
+	@Query(value = "insert into stockItem values(:prod,:qty)",nativeQuery = true)
 	public int insertProduct(
-			@Param("user") User user,
-			@Param("qty") double quantity, 
-			@Param("prod") Product product
+			@Param("prod") Product product,
+			@Param("qty") double quantity 
 	);
-	
-	public Collection<ShoppingBasketItem> findByUser(User user);
-
 }

@@ -14,6 +14,7 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	ProductDAO productDao;
 	
+	/*
 	@Override
 	public Collection<Product> getAllProducts() {
 		return productDao.findAll();
@@ -24,11 +25,12 @@ public class ProductServiceImpl implements ProductService {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	*/
+	
 	@Override
 	public boolean insertNewProduct(Product product) {
 		try {
-			int rows = productDao.insertProduct(product.getProductId(), product.getProductName(), product.getProductPrice(), product.getProductQuantity(), product.getProductType());
+			int rows = productDao.insertProduct(product.getProductName(), product.getProductPrice(), product.getProductType());
 			if (rows > 0) 
 				return true;
 			else
@@ -40,13 +42,13 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public boolean deleteProductById(int id) {
+	public boolean deleteProductById(String id) {
 		productDao.deleteById(id);
 		return true;
 	}
 
 	@Override
-	public Product getProductById(int id) {
+	public Product getProductById(String id) {
 		return productDao.findById(id).orElse(null);
 	}
 
