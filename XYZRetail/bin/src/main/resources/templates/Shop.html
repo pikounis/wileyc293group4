@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>User products</title>
+
+<style>
+div.table 
+{
+    display: table;
+    margin: 5px;
+}
+form.tr, div.tr
+{
+    display: table-row;
+    margin: 5px;
+}
+span.td
+{
+    display: table-cell;
+    padding: 8px;
+}
+
+.hidden {
+	display: none;
+}
+</style>
+
+</head>
+<body>
+
+<h1>XYZ Retail</h1>
+<hr>
+<h4>Shop Products</h4>
+
+<div class="table">
+	<div class="tr">
+        <span class="td">Product ID</span>
+        <span class="td">Name</span>
+        <span class="td">Type</span>
+        <span class="td">Price</span>
+        <span class="td">Quantity</span>
+    </div>
+    
+	     <form th:each="product : ${products}" class="tr" action="#" th:action="@{./addProductToCart}" method="post"> 
+	        <span class="td" th:text="${product.productId}"></span>
+	        <span class="td" th:text="${product.productName}"></span>
+	        <span class="td" th:text="${product.productType}"></span>
+	        <span class="td" th:text="${product.productPrice}"></span>
+	        <span class="td" th:text="${product.productQuantity}"></span>
+	     	<span class="td"><input type="number" step="1" name="desiredQty"/></span>
+	     	<span class="td"><input class="hidden" type="text" name="id" th:value="${product.productId}"/></span>
+	        <span class="td"><input type="submit" value="Add to cart"></span> 
+	    </form>
+</div>
+<p th:text="${message}"></p>
+<a href="./shopMenu">Back to the menu</a>
+</body>
+</html>

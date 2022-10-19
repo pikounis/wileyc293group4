@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean updateUserLastOrder(User user) {
-		int rows = userDao.updateLastOrder(user.getUsername(), user.getLastOrder()+1);
+		int rows = 0;//userDao.updateLastOrder(user.getUsername(), user.getLastOrder()+1);
 		if (rows == 0){
 			return false;
 		} else {

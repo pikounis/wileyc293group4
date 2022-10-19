@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Delete Product Screen</title>
+</head>
+<body>
+
+<h1>XYZ Retail</h1>
+<hr>
+<h4>Delete product</h4>
+
+<form action="#" th:action="@{./deleteProduct}" th:object="${prd}" method="post">
+
+Enter product id : <select th:field="*{productId}">
+		<option th:each="id : ${prdIds}" th:value="${id}" th:text="${id}"></option>
+</select><br><br>
+
+<input type="submit" value="Delete product">
+</form>
+<br><br>
+<p th:text="${message}"></p>
+
+<a href="./storeMenu">Back to the menu</a>
+</body>
+</html>

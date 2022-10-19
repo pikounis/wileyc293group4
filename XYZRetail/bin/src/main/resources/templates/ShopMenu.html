@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>User Menu Screen</title>
+</head>
+<body>
+
+<h1>XYZ Retail</h1>
+<hr>
+<h4 th:text="'Welcome, ' + ${session.user.username}"></h4>
+
+<a href="./shopProducts">Shop products</a>
+</body>
+</html>

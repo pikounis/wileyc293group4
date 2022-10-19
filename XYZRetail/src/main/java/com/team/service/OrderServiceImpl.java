@@ -6,22 +6,22 @@ import org.springframework.stereotype.Service;
 import com.team.entity.Order;
 import com.team.entity.Product;
 import com.team.entity.User;
-import com.team.persistence.OrderDao;
+import com.team.persistence.OrderDAO;
 
 @Service
 public class OrderServiceImpl implements OrderService {
 	
 	@Autowired
-	OrderDao orderDao;
+	OrderDAO orderDao;
 
 	@Override
 	public boolean addProductToOrder(User user, Product product) {
-		// Check entered product quantity
-		// if less than stock take them away from stock and add to order
-		// else throw an exception
-		// productDao - update Product for changing the quantity, 
-		// select * from Product where id=product.id and quantity>in.quantity to check for quantity
-		Order oldOrder = orderDao.findByOrderIdAndUser(user.getLastOrder(), user);
+//		 Check entered product quantity
+//		 if less than stock take them away from stock and add to order
+//		 else throw an exception
+//		 productDao - update Product for changing the quantity, 
+//		 select * from Product where id=product.id and quantity>in.quantity to check for quantity
+		Order oldOrder = null;// orderDao.findByOrderIdAndUser(user.getLastOrder(), user);
 		if (oldOrder != null) {
 			System.out.println("Order present");
 			if (oldOrder.isOpen()) {

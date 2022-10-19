@@ -7,7 +7,7 @@ import com.team.entity.Order;
 import com.team.entity.User;
 
 @Repository
-public interface OrderDao extends JpaRepository<Order, Integer>{
+public interface OrderDAO extends JpaRepository<Order, Integer>{
 	
 	public Order findByOrderIdAndUser(int orderId, User user);
 }

@@ -22,7 +22,6 @@ public class Order {
 	@Id
 	private int orderId;
 	@ManyToOne
-	@Id
 	private User user;
 	
 	private boolean open;

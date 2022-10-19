@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Save Product Screen</title>
+</head>
+<body>
+
+<h1>XYZ Retail</h1>
+<hr>
+<h4>Add new product</h4>
+
+<form action="#" th:action="@{./saveProduct}" th:object="${command}" method="post">
+
+Enter product id : <input type="text" th:field="*{productId}"><br><br>
+Enter product name : <input type="text" th:field="*{productName}"><br><br>
+Enter product type : <input type="text" th:field="*{productType}"><br><br>
+Enter product price : <input type="text" th:field="*{productPrice}"><br><br>
+Enter quantity available : <input type="text" th:field="*{productQuantity}"><br><br>
+<input type="submit" value="Add product">
+</form>
+<br><br>
+<p th:text="${message}"></p>
+
+<a href="./storeMenu">Back to the menu</a>
+</body>
+</html>

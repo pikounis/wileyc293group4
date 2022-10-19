@@ -2,11 +2,17 @@ package com.team.exceptions;
 
 public class NegativeInputException extends Exception {
 
-	public NegativeInputException() {
-		super();
+	String errorCode;
+	
+	public NegativeInputException(String errorCode) {
+		this.setErrorCode(errorCode);
+	}
+	
+	public String getErrorCode() {
+		return errorCode;
 	}
 
-	public NegativeInputException(String message) {
-		super(message);
+	public void setErrorCode(String errorCode) {
+		this.errorCode = errorCode;
 	}
 }
