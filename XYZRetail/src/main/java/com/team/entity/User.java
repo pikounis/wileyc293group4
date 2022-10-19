@@ -19,7 +19,6 @@ public class User {
 	private String username;
 	private boolean admin;
 	private String password;
-	private int lastOrder;
 	@OneToOne
 	private ShoppingBasket shoppingBasket;
 }
