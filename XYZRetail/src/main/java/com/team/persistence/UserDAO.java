@@ -15,6 +15,7 @@ public interface UserDAO extends JpaRepository<User, String>{
 	
 	public User getUserByUsernameAndPassword(String username, String password);
 	
+	/*
 	@Transactional
 	@Modifying
 	@Query(value = "update loginUser set orderNumber=:last where username=:name", nativeQuery = true)
@@ -24,5 +25,5 @@ public interface UserDAO extends JpaRepository<User, String>{
 	@Modifying
 	@Query(value = "insert into loginuser values(:username,:admin,:ord,:password)",nativeQuery = true)
 	public int insertUser(@Param("username") String username, @Param("admin") boolean admin, @Param("ord") int orderN, @Param("password") String password);
-	
+	*/
 }

@@ -15,7 +15,7 @@ import com.team.entity.User;
 
 @Repository
 public interface OrderDAO extends JpaRepository<OrderItem, OrderItemPk>{
-	
+	/*
 	@Transactional
 	@Modifying
 	@Query(value = "insert into shoppingBasketItem values(:ord,:qty,:user,:prod)",nativeQuery = true)
@@ -26,5 +26,5 @@ public interface OrderDAO extends JpaRepository<OrderItem, OrderItemPk>{
 			@Param("prod") Product product
 	);
 	
-	
+	*/
 }

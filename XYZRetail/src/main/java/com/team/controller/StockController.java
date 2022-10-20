@@ -18,6 +18,7 @@ import com.team.entity.ShoppingBasketItem;
 import com.team.entity.StockItem;
 import com.team.entity.Types;
 import com.team.entity.User;
+import com.team.exceptions.OutOfStockException;
 import com.team.service.OrderService;
 import com.team.service.ProductService;
 import com.team.service.ShoppingBasketService;
@@ -35,9 +36,7 @@ public class StockController {
 
 	@ModelAttribute("prdTypes")
 	List<String> getProductTypes() {
-		return stockService.getAllStockItems().stream()
-		.map(StockItem::getProduct)
-		.map(Product::getProductType)
+		return productService.getAllTypes().stream()
 		.map(Types::getType)
 		.distinct()
 		.collect(Collectors.toList());
@@ -73,7 +72,7 @@ public class StockController {
 
 		ModelAndView modelAndView = new ModelAndView();
 		String message = null;
-		if (productService.insertNewProduct(stock.getProduct()) && stockService.insertNewStockItem(stock)) 
+		if (productService.saveProduct(stock.getProduct()) && stockService.insertNewStockItem(stock)) 
 				message = "Product has been added";
 		else
 			message = "Product has not been added";
@@ -127,7 +126,11 @@ public class StockController {
 		Product addProd = productService.getProductById(id);
 		ShoppingBasketItem sbItem = new ShoppingBasketItem(user, addProd, quantity);
 		System.out.println(sbItem.toString());
-		basketService.addProductToBasket(sbItem);
+		try {
+			basketService.addProductToBasket(sbItem);
+		} catch (OutOfStockException e) {
+			// Add here the message that we don't have enough stock
+		}
 		
 		ModelAndView modelAndView = new ModelAndView("Shop");
 		Collection<StockItem> prdList = stockService.getAllStockItems();

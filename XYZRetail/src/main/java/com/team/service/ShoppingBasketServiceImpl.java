@@ -26,10 +26,12 @@ public class ShoppingBasketServiceImpl implements ShoppingBasketService {
 		if (item.getQuantity() > stockDao.getReferenceById(item.getProduct()).getQuantity()) {
 			throw new OutOfStockException("Can't add product to shopping cart because we don't have enough in stock");
 		}
-		int rows = shoppingBasketDao.insertProduct(item.getUser(), item.getQuantity(), item.getProduct());
-		if (rows > 0) 
+		try {
+			shoppingBasketDao.save(item);
 			return true;
-		return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 	
 	@Override

@@ -20,11 +20,13 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public boolean addProductToOrder(OrderItem item) {
-		int rows = orderDao.insertProduct(item.getOrderId(), item.getQuantity(), item.getUser(), item.getProduct());
-		if (rows > 0)
+		try {
+			orderDao.save(item);
 			return true;
-		else
+		}
+		catch (Exception e){
 			return false;
+		}
 	}
 
 	@Override

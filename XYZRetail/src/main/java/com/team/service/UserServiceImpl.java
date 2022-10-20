@@ -26,12 +26,10 @@ public class UserServiceImpl implements UserService {
 	public boolean registerUser(User user) {
 		if (!user.getUsername().equals("")) {
 			try {
-				int rows = userDao.insertUser(user.getUsername(), user.isAdmin(), 0, user.getPassword());
-				if (rows == 0){
-					return false;
-				} else {
-					return true;
-				}
+				user.setAdmin(false);
+				user.setOrderNumber(0);
+				userDao.save(user);
+				return true;
 			} catch (Exception e) {
 				return false;
 			}
@@ -41,11 +39,27 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean updateUserLastOrder(User user) {
-		int rows = 0;//userDao.updateLastOrder(user.getUsername(), user.getLastOrder()+1);
-		if (rows == 0){
-			return false;
-		} else {
+		try {
+			user.setOrderNumber(user.getOrderNumber()+1);
+			userDao.save(user);
 			return true;
+		} catch (Exception e) {
+			return false;
 		}
 	}
+	
+	@Override
+	public boolean setAdmin(User user, boolean admin) {
+		user.setAdmin(admin);
+		System.out.println(user);
+		try {
+			userDao.save(user);
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("failed to change admin permissions for user");
+			return false;
+		}
+		return true;
+	}
+
 }

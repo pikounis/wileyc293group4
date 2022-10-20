@@ -17,7 +17,7 @@ import com.team.entity.User;
 
 @Repository
 public interface ShoppingBasketDao extends JpaRepository<ShoppingBasketItem, BasketItemPk> {
-	
+	/*
 	@Transactional
 	@Modifying
 	@Query(value = "insert into shoppingBasketItem values(:qty,:user,:prod)",nativeQuery = true)
@@ -26,7 +26,7 @@ public interface ShoppingBasketDao extends JpaRepository<ShoppingBasketItem, Bas
 			@Param("qty") double quantity, 
 			@Param("prod") Product product
 	);
-	
+	*/
 	public Collection<ShoppingBasketItem> findByUser(User user);
 	
 	// Not sure this works

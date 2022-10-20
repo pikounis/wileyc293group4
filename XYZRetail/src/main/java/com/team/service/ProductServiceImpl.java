@@ -30,7 +30,6 @@ public class ProductServiceImpl implements ProductService {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	*/
 	
 	@Override
 	public boolean insertNewProduct(Product product) {
@@ -45,6 +44,17 @@ public class ProductServiceImpl implements ProductService {
 			return false;
 		}
 			
+	} */
+	
+	@Override
+	public boolean saveProduct(Product product) {
+		try {
+			product.setProductType(typesDao.getReferenceById(product.getProductType().getType()));
+			productDao.save(product);
+		}catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
@@ -57,5 +67,27 @@ public class ProductServiceImpl implements ProductService {
 	public Product getProductById(String id) {
 		return productDao.findById(id).orElse(null);
 	}
+	
+	@Override
+	public Collection<Types> getAllTypes() {
+		return typesDao.findAll();
+	}
+	
+	@Override
+	public boolean saveType(Types type) {
+		try {
+			typesDao.save(type);
+		}catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
+	
+	// This is mainly for getting taxes
+	@Override
+	public Types getType(String type) {
+		return typesDao.findById(type).orElse(null);
+	}
+	
 
 }

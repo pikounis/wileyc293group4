@@ -23,11 +23,8 @@ public class StockItemServiceImpl implements StockItemService {
 	@Override
 	public boolean insertNewStockItem(StockItem stock) {
 		try {
-			int rows = stockDao.insertProduct(stock.getProduct(), stock.getQuantity());
-			if (rows > 0) 
-				return true;
-			else
-				return false;
+			stockDao.save(stock);
+			return true;
 		} catch (Exception e){
 			return false;
 		}		

@@ -13,12 +13,12 @@ import com.team.entity.StockItem;
 
 @Repository
 public interface StockItemDAO extends JpaRepository<StockItem, Product> {
-	
+	/*
 	@Transactional
 	@Modifying
 	@Query(value = "insert into stockItem values(:prod,:qty)",nativeQuery = true)
 	public int insertProduct(
 			@Param("prod") Product product,
 			@Param("qty") double quantity 
-	);
+	); */
 }

@@ -13,7 +13,7 @@ import com.team.entity.Types;
 
 @Repository
 public interface ProductDAO extends JpaRepository<Product, String>{
-	
+	/*
 	@Transactional
 	@Modifying
 	@Query(value = "insert into product values(:name,:price,:type)",nativeQuery = true)
@@ -22,5 +22,5 @@ public interface ProductDAO extends JpaRepository<Product, String>{
 			@Param("price") double price, 
 			@Param("type") Types type
 	);
-	
+	*/
 }

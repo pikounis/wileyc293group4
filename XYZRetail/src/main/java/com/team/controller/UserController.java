@@ -64,5 +64,11 @@ public class UserController {
 		return modelAndView;
 	}
 	
+	@RequestMapping("/setAdmin")
+	public ModelAndView makeAdmin(@ModelAttribute("user") User user) {
+		userService.setAdmin(user, true);
+		return new ModelAndView("ShopMenu");
+	}
+	
 	
 }

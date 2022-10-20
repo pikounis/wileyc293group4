@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Save Product Screen</title>
+</head>
+<body>
+
+<h1>XYZ Retail</h1>
+<hr>
+<h4>Add new product</h4>
+
+<form action="#" th:action="@{./saveType}" th:object="${command}" method="post">
+
+Enter new product type : <input type="text" th:field="*{type}"><br><br>
+Enter product taxes : <input type="text" th:field="*{tax}">%<br><br>
+Existing product types:
+<ul>
+	<li th:each="tType : ${prdTypes}" th:text="${tType}"></li>
+</ul>
+<input type="submit" value="Add product">
+</form>
+<br><br>
+<p th:text="${message}"></p>
+
+<a href="./storeMenu">Back to the menu</a>
+</body>
+</html>
