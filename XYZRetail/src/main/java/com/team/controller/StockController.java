@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team.entity.DisplayItem;
 import com.team.entity.Product;
 import com.team.entity.ShoppingBasketItem;
 import com.team.entity.StockItem;
@@ -194,7 +195,20 @@ public class StockController {
 			if(orderService.purchaseBasket(user, listItems)) {
 				userService.updateUserLastOrder(user);
 				basketService.emptyBasket(user);
-				view.addObject("products", listItems);
+
+				Collection<DisplayItem> display = listItems.stream()
+				.map(item -> {
+					double price = item.getProduct().getProductPrice();
+					double tax = item.getProduct().getProductType().getTax();
+					int qty = item.getQuantity();
+					double totalPrice = (price*qty)+(tax/100)*qty*price;
+					return new DisplayItem(item.getProduct(), qty, item.getProduct().getProductType().getType(), price, tax, totalPrice);
+				}).toList();
+				double wholePrice = display.stream()
+						.map(DisplayItem::getWholePrice)
+						.reduce((a, b) -> a + b).orElse(null);
+				view.addObject("total", wholePrice);
+				view.addObject("products", display);
 				view.setViewName("checkout");
 			} else {
 				view.addObject("message", "there was a problem with the order");
