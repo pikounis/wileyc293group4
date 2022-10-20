@@ -10,15 +10,14 @@
 <hr>
 <h4>Add new product</h4>
 
-<form action="#" th:action="@{./saveType}" th:object="${command}" method="post">
+<form action="#" th:action="@{./updateType}" th:object="${command}" method="post">
 
 Enter new product type : <select th:field="*{type}">
 						<option th:each="type : ${prdTypes}" th:value="${type}" th:text="${type}"></option>
 					 </select><br><br>
 Enter product taxes : <input type="text" th:field="*{tax}">%<br><br>
-<p th:text="'Current taxes: ' + ${tax}*100 + '%'"></p> <br><br>
 
-<input type="submit" value="Add product">
+<input type="submit" value="Save product">
 </form>
 <br><br>
 <p th:text="${message}"></p>

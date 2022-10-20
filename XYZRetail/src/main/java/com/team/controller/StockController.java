@@ -140,4 +140,43 @@ public class StockController {
 		modelAndView.addObject("message", "Product chosen " + addProd.getProductName() + " qty " + quantity);
 		return modelAndView;
 	}
+	
+	@RequestMapping("/saveTypePage")
+	public ModelAndView getNewTypePage() {
+		ModelAndView modelAndView = new ModelAndView("AddType");
+		modelAndView.addObject("command", new Types());
+		return modelAndView;
+	}
+	
+	@RequestMapping("/saveType")
+	public ModelAndView saveNewType(@ModelAttribute("command") Types type) {
+		ModelAndView modelAndView = new ModelAndView("AddType");
+		if(productService.saveType(type))
+			modelAndView.addObject("message", "Type added!");
+		else
+			modelAndView.addObject("message", "Type not added");
+		modelAndView.addObject("command", new Types());
+		return modelAndView;
+	}
+	
+	@RequestMapping("/updateTypePage")
+	public ModelAndView getChangeTypePage() {
+		ModelAndView modelAndView = new ModelAndView("ChangeTypeTaxes");
+		modelAndView.addObject("command", new Types());
+		return modelAndView;
+	}
+	
+	@RequestMapping("/updateType")
+	public ModelAndView saveChangeType(@ModelAttribute("command") Types type) {
+		ModelAndView modelAndView = new ModelAndView("ChangeTypeTaxes");
+		if(productService.saveType(type))
+			modelAndView.addObject("message", "Type edited!");
+		else
+			modelAndView.addObject("message", "Type not edited");
+		modelAndView.addObject("command", new Types());
+		return modelAndView;
+	}
+
+
+
 }
