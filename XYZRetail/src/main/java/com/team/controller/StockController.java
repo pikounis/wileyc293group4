@@ -23,6 +23,7 @@ import com.team.service.OrderService;
 import com.team.service.ProductService;
 import com.team.service.ShoppingBasketService;
 import com.team.service.StockItemService;
+import com.team.service.UserService;
 
 @Controller
 public class StockController {
@@ -33,6 +34,10 @@ public class StockController {
 	private StockItemService stockService;
 	@Autowired
 	private ShoppingBasketService basketService;
+	@Autowired
+	private OrderService orderService;
+	@Autowired
+	private UserService userService;
 
 	@ModelAttribute("prdTypes")
 	List<String> getProductTypes() {
@@ -127,7 +132,6 @@ public class StockController {
 		int quantity = Integer.parseInt(request.getParameter("desiredQty"));
 		Product addProd = productService.getProductById(id);
 		ShoppingBasketItem sbItem = new ShoppingBasketItem(user, addProd, quantity);
-		System.out.println(sbItem.toString());
 		try {
 			basketService.addProductToBasket(sbItem);
 		} catch (OutOfStockException e) {
@@ -176,7 +180,27 @@ public class StockController {
 		modelAndView.addObject("command", new Types());
 		return modelAndView;
 	}
-
+	
+	@RequestMapping("/checkout")
+	public ModelAndView getCheckoutController(@SessionAttribute("user") User user){
+		ModelAndView view = new ModelAndView();
+		Collection<ShoppingBasketItem> listItems = basketService.getShoppingBasket(user);
+		try {
+			if(orderService.purchaseBasket(user, listItems)) {
+				userService.updateUserLastOrder(user);
+				basketService.emptyBasket(user);
+				view.addObject("products", "listItems");
+				view.setViewName("checkout");
+			} else {
+				view.addObject("message", "there was a problem with the order");
+				view.setViewName("ShoppingCart");
+			}
+		} catch (OutOfStockException e) {
+			view.addObject("message", "there was a problem with the order");
+			view.setViewName("ShoppingCart");
+		}
+		return view;
+	}
 
 
 }

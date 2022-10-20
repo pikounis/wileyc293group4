@@ -78,10 +78,7 @@ public class UserController {
 		return new ModelAndView("ShopMenu");
 	}
 	
-	@RequestMapping("/checkout")
-	public ModelAndView getMenuUserPageController() {
-		return new ModelAndView("checkout");
-	}
+	
 	
 	
 	

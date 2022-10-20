@@ -23,6 +23,7 @@ public class OrderServiceImpl implements OrderService {
 	
 	@Autowired
 	StockItemDAO stockDao;
+	
 
 	@Override
 	public boolean addProductToOrder(OrderItem item) {
@@ -46,15 +47,24 @@ public class OrderServiceImpl implements OrderService {
 		}
 		
 		items.stream()
-		.map((item) -> {
+		.forEach((item) -> {
 			StockItem changing = stockDao.getByProduct(item.getProduct());
+			System.out.println(changing.toString());
+			System.out.println(changing.getQuantity());
+			System.out.println(item.getQuantity());
 			changing.setQuantity(changing.getQuantity() - item.getQuantity());
-			return stockDao.save(changing);
+			//System.out.println("the beautiful product");
+			//
+			stockDao.save(changing);
 							});
 		
 		boolean saveAttempt = items.stream()
 		.map(item -> addProductToOrder(new OrderItem(user, user.getOrderNumber(), item.getProduct(), item.getQuantity())))
 		.allMatch(t -> t == true);
+		
+		if (saveAttempt) {
+			
+		}
 		
 		return saveAttempt;
 			

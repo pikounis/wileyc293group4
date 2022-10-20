@@ -28,7 +28,8 @@ public interface ShoppingBasketDao extends JpaRepository<ShoppingBasketItem, Int
 	*/
 	public Collection<ShoppingBasketItem> findByUser(User user);
 	
-	// Not sure this works
+	@Transactional
+	@Modifying
 	public int deleteByUser(User user);
 	
 	public ShoppingBasketItem findByProduct(Product product);

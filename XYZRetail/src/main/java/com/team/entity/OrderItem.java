@@ -25,9 +25,11 @@ public class OrderItem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int orderRowNo;
+	
 	@ManyToOne
 	private User user;
     private int orderId;
+   
     @OneToOne
     private Product product;
     private int quantity;
