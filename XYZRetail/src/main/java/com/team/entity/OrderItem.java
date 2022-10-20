@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
@@ -18,13 +20,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-@IdClass(OrderItemPk.class)
 public class OrderItem {
     
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int orderRowNo;
 	@ManyToOne
 	private User user;
-    @Id
     private int orderId;
     @OneToOne
     private Product product;

@@ -9,12 +9,11 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.team.entity.OrderItem;
-import com.team.entity.OrderItemPk;
 import com.team.entity.Product;
 import com.team.entity.User;
 
 @Repository
-public interface OrderDAO extends JpaRepository<OrderItem, OrderItemPk>{
+public interface OrderDAO extends JpaRepository<OrderItem, Integer>{
 	/*
 	@Transactional
 	@Modifying
