@@ -48,12 +48,15 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	public boolean saveProduct(Product product) {
-		try {
+		if(!product.getProductName().equals("")) {
+					try {
 			productDao.save(product);
 		}catch (Exception e) {
 			return false;
 		}
 		return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -74,12 +77,15 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	public boolean saveType(Types type) {
-		try {
+		if(!type.getType().equals("")) {
+					try {
 			typesDao.save(type);
 		}catch (Exception e) {
 			return false;
 		}
 		return true;
+		}
+		return false;
 	}
 	
 	// This is mainly for getting taxes

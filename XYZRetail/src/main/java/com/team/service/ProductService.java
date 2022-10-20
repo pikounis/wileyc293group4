@@ -11,8 +11,8 @@ public interface ProductService {
 	//boolean insertNewProduct(Product product);
 	boolean deleteProductById(String id);
 	Product getProductById(String id);
-	boolean saveProduct(Product product);
-	boolean saveType(Types type);
+	boolean saveProduct(Product product);	
+	boolean saveType(Types type);	
 	Collection<Types> getAllTypes();
 	Types getType(String type);
 }
