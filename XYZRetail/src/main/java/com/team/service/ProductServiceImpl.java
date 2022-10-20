@@ -49,7 +49,6 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public boolean saveProduct(Product product) {
 		try {
-			product.setProductType(typesDao.getReferenceById(product.getProductType().getType()));
 			productDao.save(product);
 		}catch (Exception e) {
 			return false;
