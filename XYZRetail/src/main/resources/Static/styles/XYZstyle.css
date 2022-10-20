@@ -14,15 +14,29 @@ h4{
 	opacity: 0.5;	
 }
 
-a{
+input, a{
 	color: white;
+	border-radius: 10%;
+	border: 2px solid #E8BA15;
+	text-decoration: none;
+	padding: 2px 10px;
+	background-color: #695409;
 }
 
 table{
 	background-color: rgb(0, 128, 255);
+	border: 5px solid #E8BA15;
+	border-radius: 20px;	
+	margin-bottom: 10px;
 }
 
-th, tr{
-	/*border: 1px solid #2337EB;*/
+th, td{
 	padding: 10px;	
+	border-top:solid black 1px;
+}
+
+th{
+	border-top:solid black 1px;
+	border-top: none;
+	color: #E8BA15
 }
