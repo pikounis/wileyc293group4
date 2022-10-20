@@ -42,6 +42,14 @@ public class UserController {
 		return modelAndView;
 	}
 	
+	@RequestMapping("/LogoutOfSession")
+	public ModelAndView getLogoutPage(@ModelAttribute("command") User user) {
+		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.setViewName("Login");
+		modelAndView.addObject("message", "Logout Successful!");
+		return modelAndView;
+	}
+	
 	@RequestMapping("/register")
 	public ModelAndView getRegisterPage() {
 		return new ModelAndView("Register","command",new User());

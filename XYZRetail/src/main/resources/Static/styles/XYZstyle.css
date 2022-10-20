@@ -1,0 +1,19 @@
+@charset "ISO-8859-1";
+body{
+	background-color: #010742;
+	font-family: 'Titillium Web', sans-serif;
+	color: white;
+}
+
+h1{
+	color: #E8BA15;
+}
+
+h4{
+	color: #E8BA15;
+	opacity: 0.5;	
+}
+
+a{
+	color: white;
+}
