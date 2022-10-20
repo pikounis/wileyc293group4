@@ -43,7 +43,7 @@ span.td
     
 	     <form th:each="prod : ${products}" class="tr" action="#" th:action="@{./addProductToCart}" method="post"> 
 	        <span class="td" th:text="${prod.product.productName}"></span>
-	        <span class="td" th:text="${prod.product.productType}"></span>
+	        <span class="td" th:text="${prod.product.productType.type}"></span>
 	        <span class="td" th:text="${prod.product.productPrice}"></span>
 	        <span class="td" th:text="${prod.quantity}"></span>
 	     	<span class="td"><input type="number" step="1" name="desiredQty"/></span>

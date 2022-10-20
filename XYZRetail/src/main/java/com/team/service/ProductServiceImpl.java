@@ -6,13 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.team.entity.Product;
+import com.team.entity.Types;
 import com.team.persistence.ProductDAO;
+import com.team.persistence.TypesDao;
 
 @Service
 public class ProductServiceImpl implements ProductService {
 	
 	@Autowired
 	ProductDAO productDao;
+	
+	@Autowired
+	TypesDao typesDao;
 	
 	/*
 	@Override
@@ -29,8 +34,9 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	public boolean insertNewProduct(Product product) {
+		Types type = typesDao.findById(product.getProductType().getType()).orElse(null);
 		try {
-			int rows = productDao.insertProduct(product.getProductName(), product.getProductPrice(), product.getProductType());
+			int rows = productDao.insertProduct(product.getProductName(), product.getProductPrice(), type);
 			if (rows > 0) 
 				return true;
 			else

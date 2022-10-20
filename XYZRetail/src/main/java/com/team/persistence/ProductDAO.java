@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.team.entity.Product;
+import com.team.entity.Types;
 
 @Repository
 public interface ProductDAO extends JpaRepository<Product, String>{
@@ -19,7 +20,7 @@ public interface ProductDAO extends JpaRepository<Product, String>{
 	public int insertProduct(
 			@Param("name") String name,
 			@Param("price") double price, 
-			@Param("type") String type
+			@Param("type") Types type
 	);
 	
 }

@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.team.entity.Product;
 import com.team.entity.ShoppingBasketItem;
 import com.team.entity.StockItem;
+import com.team.entity.Types;
 import com.team.entity.User;
 import com.team.service.OrderService;
 import com.team.service.ProductService;
@@ -37,6 +38,7 @@ public class StockController {
 		return stockService.getAllStockItems().stream()
 		.map(StockItem::getProduct)
 		.map(Product::getProductType)
+		.map(Types::getType)
 		.distinct()
 		.collect(Collectors.toList());
 	}
@@ -71,7 +73,6 @@ public class StockController {
 
 		ModelAndView modelAndView = new ModelAndView();
 		String message = null;
-		
 		if (productService.insertNewProduct(stock.getProduct()) && stockService.insertNewStockItem(stock)) 
 				message = "Product has been added";
 		else
@@ -124,7 +125,7 @@ public class StockController {
 		String id = request.getParameter("id");
 		int quantity = Integer.parseInt(request.getParameter("desiredQty"));
 		Product addProd = productService.getProductById(id);
-		ShoppingBasketItem sbItem = new ShoppingBasketItem(user, addProd.getProductName(), addProd, quantity);
+		ShoppingBasketItem sbItem = new ShoppingBasketItem(user, addProd, quantity);
 		System.out.println(sbItem.toString());
 		basketService.addProductToBasket(sbItem);
 		

@@ -19,7 +19,7 @@ public interface ShoppingBasketDao extends JpaRepository<ShoppingBasketItem, Use
 	
 	@Transactional
 	@Modifying
-	@Query(value = "insert into shoppingBasketItem values(:prod,:qty,:user)",nativeQuery = true)
+	@Query(value = "insert into shoppingBasketItem values(:qty,:user,:prod)",nativeQuery = true)
 	public int insertProduct(
 			@Param("user") User user,
 			@Param("qty") double quantity, 

@@ -18,18 +18,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
+@IdClass(BasketItemPk.class)
 public class ShoppingBasketItem implements Serializable {
     
-	
-	//private int productId;
-	
-	//@JoinColumn(name = "productId")
+	@Id
 	@ManyToOne
     private User user;
 	@Id
-	private String productName;
-	@MapsId
-	@JoinColumn(name = "productName")
 	@OneToOne
 	private Product product;
     private int quantity;

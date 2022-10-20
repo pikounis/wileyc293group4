@@ -13,7 +13,7 @@
 <form action="#" th:action="@{./saveProduct}" th:object="${command}" method="post">
 
 Enter product name : <input type="text" th:field="*{product.productName}"><br><br>
-Enter product type : <input type="text" th:field="*{product.productType}"><br><br>
+Enter product type : <input type="text" th:field="*{product.productType.type}"><br><br>
 Enter product price : <input type="text" th:field="*{product.productPrice}"><br><br>
 Enter quantity available : <input type="text" th:field="*{quantity}"><br><br>
 <input type="submit" value="Add product">
