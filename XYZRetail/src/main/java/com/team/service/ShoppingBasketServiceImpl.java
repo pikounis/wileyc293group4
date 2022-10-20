@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.team.entity.ShoppingBasketItem;
 import com.team.entity.User;
+import com.team.exceptions.NegativeInputException;
 import com.team.exceptions.OutOfStockException;
 import com.team.persistence.ShoppingBasketDao;
 import com.team.persistence.StockItemDAO;
@@ -21,9 +22,11 @@ public class ShoppingBasketServiceImpl implements ShoppingBasketService {
 	private StockItemDAO stockDao;
 	
 	@Override
-	public boolean addProductToBasket(ShoppingBasketItem item) throws OutOfStockException {
-		// Also add check for Negative input
-		System.out.println(stockDao.getByProduct(item.getProduct()).getQuantity());
+	public boolean addProductToBasket(ShoppingBasketItem item) throws OutOfStockException, NegativeInputException {
+		
+		if (item.getQuantity() <= 0) {
+			throw new NegativeInputException("Can't add less than one product");
+		}
 		if (item.getQuantity() > stockDao.getByProduct(item.getProduct()).getQuantity()) {
 			throw new OutOfStockException("Can't add product to shopping cart because we don't have enough in stock");
 		}

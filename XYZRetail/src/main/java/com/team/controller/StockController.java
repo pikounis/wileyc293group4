@@ -18,6 +18,7 @@ import com.team.entity.ShoppingBasketItem;
 import com.team.entity.StockItem;
 import com.team.entity.Types;
 import com.team.entity.User;
+import com.team.exceptions.NegativeInputException;
 import com.team.exceptions.OutOfStockException;
 import com.team.service.OrderService;
 import com.team.service.ProductService;
@@ -128,20 +129,24 @@ public class StockController {
 	@RequestMapping("/addProductToCart")
 	public ModelAndView addProductToCartController(HttpServletRequest request, @SessionAttribute("user") User user) {
 		
+		ModelAndView modelAndView = new ModelAndView("Shop");
 		String id = request.getParameter("id");
 		int quantity = Integer.parseInt(request.getParameter("desiredQty"));
 		Product addProd = productService.getProductById(id);
 		ShoppingBasketItem sbItem = new ShoppingBasketItem(user, addProd, quantity);
 		try {
 			basketService.addProductToBasket(sbItem);
+			modelAndView.addObject("message", "Product chosen " + addProd.getProductName() + " qty " + quantity);
+		} catch (NegativeInputException e) {
+			modelAndView.addObject("message", "Product quantity must be greater than 0");
 		} catch (OutOfStockException e) {
-			// Add here the message that we don't have enough stock
+			modelAndView.addObject("message", "Product quantity out of stock");
 		}
 		
-		ModelAndView modelAndView = new ModelAndView("Shop");
+		
 		Collection<StockItem> prdList = stockService.getAllStockItems();
 		modelAndView.addObject("products", prdList);
-		modelAndView.addObject("message", "Product chosen " + addProd.getProductName() + " qty " + quantity);
+		
 		return modelAndView;
 	}
 	
