@@ -72,6 +72,8 @@ public class StockController {
 
 		ModelAndView modelAndView = new ModelAndView();
 		String message = null;
+		stock.setProductName(stock.getProduct().getProductName());
+		System.out.println(stock.getProduct().toString());
 		if (productService.saveProduct(stock.getProduct()) && stockService.insertNewStockItem(stock)) 
 				message = "Product has been added";
 		else

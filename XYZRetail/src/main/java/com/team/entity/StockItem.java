@@ -2,6 +2,7 @@ package com.team.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -23,7 +24,7 @@ public class StockItem implements Serializable {
 	private String productName;
 	@MapsId
 	@JoinColumn(name = "productName")
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Product product;
 	private int quantity;
 }
