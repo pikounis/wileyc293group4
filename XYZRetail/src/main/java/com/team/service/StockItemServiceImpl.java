@@ -31,9 +31,9 @@ public class StockItemServiceImpl implements StockItemService {
 	}
 	
 	@Override
-	public boolean deleteStockById(Product product) {
+	public boolean deleteStockById(String id) {
 		try {	
-			stockDao.deleteById(product);
+			stockDao.deleteById(id);
 			return true;
 		} catch (Exception e){
 			return true;

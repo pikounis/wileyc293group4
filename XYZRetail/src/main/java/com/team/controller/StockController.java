@@ -100,7 +100,7 @@ public class StockController {
 	public ModelAndView searchProductController(@ModelAttribute("prd") StockItem stock) {
 		ModelAndView modelAndView = new ModelAndView();
 
-		if (stockService.deleteStockById(stock.getProduct()) && productService.deleteProductById(stock.getProduct().getProductName())) 
+		if (stockService.deleteStockById(stock.getProduct().getProductName())) 
 			modelAndView.addObject("message", "Product deleted");
 		else
 			modelAndView.addObject("message", "Product with id " + stock.getProduct().getProductName() +" does not exist");	

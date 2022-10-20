@@ -12,7 +12,7 @@ import com.team.entity.Product;
 import com.team.entity.StockItem;
 
 @Repository
-public interface StockItemDAO extends JpaRepository<StockItem, Product> {
+public interface StockItemDAO extends JpaRepository<StockItem, String> {
 	
 	public StockItem getByProduct(Product product);
 	/*
