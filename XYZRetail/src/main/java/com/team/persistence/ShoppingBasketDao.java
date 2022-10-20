@@ -10,12 +10,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.team.entity.BasketItemPk;
 import com.team.entity.Product;
 import com.team.entity.ShoppingBasketItem;
 import com.team.entity.User;
 
 @Repository
-public interface ShoppingBasketDao extends JpaRepository<ShoppingBasketItem, User> {
+public interface ShoppingBasketDao extends JpaRepository<ShoppingBasketItem, BasketItemPk> {
 	
 	@Transactional
 	@Modifying
@@ -27,5 +28,8 @@ public interface ShoppingBasketDao extends JpaRepository<ShoppingBasketItem, Use
 	);
 	
 	public Collection<ShoppingBasketItem> findByUser(User user);
+	
+	// Not sure this works
+	public int deleteByUser(User user);
 
 }
