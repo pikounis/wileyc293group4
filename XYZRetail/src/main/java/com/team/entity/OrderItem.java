@@ -31,4 +31,13 @@ public class OrderItem {
     @OneToOne
     private Product product;
     private int quantity;
+	
+    public OrderItem(User user, int orderId, Product product, int quantity) {
+		super();
+		this.user = user;
+		this.orderId = orderId;
+		this.product = product;
+		this.quantity = quantity;
+	} 
+    
 }

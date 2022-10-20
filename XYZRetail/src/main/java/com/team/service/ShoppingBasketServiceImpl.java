@@ -1,6 +1,7 @@
 package com.team.service;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,20 +23,19 @@ public class ShoppingBasketServiceImpl implements ShoppingBasketService {
 	@Override
 	public boolean addProductToBasket(ShoppingBasketItem item) throws OutOfStockException {
 		// Also add check for Negative input
-		System.out.println(item.getQuantity());
 		System.out.println(stockDao.getByProduct(item.getProduct()).getQuantity());
 		if (item.getQuantity() > stockDao.getByProduct(item.getProduct()).getQuantity()) {
 			throw new OutOfStockException("Can't add product to shopping cart because we don't have enough in stock");
 		}
-		try {
-			System.out.println("Hello");
+		Collection<ShoppingBasketItem> shoppingBasketItems = shoppingBasketDao.findByUser(item.getUser());
+		shoppingBasketItems.stream().filter((sbi)->sbi.getProduct()==item.getProduct()).findAny().ifPresentOrElse((sbi)->{
+			sbi.setQuantity(sbi.getQuantity()+item.getQuantity());
+			shoppingBasketDao.save(sbi);
+		}, ()->{
 			shoppingBasketDao.save(item);
-			System.out.println("Hello2");
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+		});
+		return true;
+		
 	}
 	
 	@Override
