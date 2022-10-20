@@ -194,7 +194,7 @@ public class StockController {
 			if(orderService.purchaseBasket(user, listItems)) {
 				userService.updateUserLastOrder(user);
 				basketService.emptyBasket(user);
-				view.addObject("products", "listItems");
+				view.addObject("products", listItems);
 				view.setViewName("checkout");
 			} else {
 				view.addObject("message", "there was a problem with the order");

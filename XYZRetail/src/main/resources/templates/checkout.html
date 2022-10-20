@@ -19,16 +19,37 @@
 				<th>Price</th>	
 				<th>Tax</th>			
 				<th>Quantity</th>
+				<th>Total Price</th>
 			</tr>
 			<tr th:each="prod : ${products}">
 				<td th:text="${prod.product.productName}"></td>
 				<td th:text="${prod.product.productType.type}"></td>
 				<td th:text="${prod.product.productPrice}"></td>
-				<!-- td th:text="${prod.product.productPrice}"></td-->
+				<td th:text="${prod.product.productType.tax}"></td>
 				<td th:text="${prod.quantity}"></td>
+				<!--(Quantity * product price) + ((taxes / 100)*product price * quantity)
+				${#numbers.formatDecimal(num,3,2,'COMMA')}
+				
+				${prod.quantity}
+					*${prod.product.productPrice}+
+					(
+					(${prod.product.productType.tax}/100)
+					*${prod.product.productPrice}
+					*${prod.quantity}
+					)
+				-->
+				<td th:text=
+				"${#numbers.formatCurrency(${prod.quantity}
+					*${prod.product.productPrice}+
+					(
+					(${prod.product.productType.tax}/100)
+					*${prod.product.productPrice}
+					*${prod.quantity}
+					)
+					
+				)}"></td>
 			</tr>
 		</table>
-	<br><br><br><br>
 	<a href="./storeMenu">Back to the menu</a>
 </body>
 </html>
