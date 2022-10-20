@@ -17,3 +17,12 @@ h4{
 a{
 	color: white;
 }
+
+table{
+	background-color: rgb(0, 128, 255);
+}
+
+th, tr{
+	/*border: 1px solid #2337EB;*/
+	padding: 10px;	
+}
