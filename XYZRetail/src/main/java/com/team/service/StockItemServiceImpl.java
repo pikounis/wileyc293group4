@@ -42,7 +42,7 @@ public class StockItemServiceImpl implements StockItemService {
 
 	@Override
 	public StockItem getProductById(Product product) {
-		return stockDao.findById(product).orElse(null);
+		return stockDao.getByProduct(product);
 	}
 	
 }

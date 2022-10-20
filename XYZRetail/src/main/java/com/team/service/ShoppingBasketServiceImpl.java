@@ -23,7 +23,9 @@ public class ShoppingBasketServiceImpl implements ShoppingBasketService {
 	@Override
 	public boolean addProductToBasket(ShoppingBasketItem item) throws OutOfStockException {
 		// Also add check for Negative input
-		if (item.getQuantity() > stockDao.getReferenceById(item.getProduct()).getQuantity()) {
+		System.out.println(item.getQuantity());
+		System.out.println(stockDao.getByProduct(item.getProduct()).getQuantity());
+		if (item.getQuantity() > stockDao.getByProduct(item.getProduct()).getQuantity()) {
 			throw new OutOfStockException("Can't add product to shopping cart because we don't have enough in stock");
 		}
 		try {

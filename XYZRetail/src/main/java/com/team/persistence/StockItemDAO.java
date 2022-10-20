@@ -13,6 +13,8 @@ import com.team.entity.StockItem;
 
 @Repository
 public interface StockItemDAO extends JpaRepository<StockItem, Product> {
+	
+	public StockItem getByProduct(Product product);
 	/*
 	@Transactional
 	@Modifying
