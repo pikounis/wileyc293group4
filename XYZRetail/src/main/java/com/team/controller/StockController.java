@@ -220,6 +220,63 @@ public class StockController {
 		}
 		return view;
 	}
-
+	
+	@RequestMapping("/removeProdFromCart")
+	public ModelAndView deleteFromCartController(@SessionAttribute("user") User user, HttpServletRequest request){
+		ModelAndView view = new ModelAndView("ShoppingCart");
+		
+		String name = request.getParameter("id");
+		Product prod = productService.getProductById(name);
+		if (prod!=null && basketService.removeProductfromBasket(user, prod)) {
+			view.addObject("message", "Product removed!");
+		} else {
+			view.addObject("message", "There was a problem removing the product");
+		}
+		
+		Collection<ShoppingBasketItem> prodList = basketService.getShoppingBasket(user);
+		
+		if(!prodList.isEmpty()) {
+			Collection<DisplayItem> display = prodList.stream()
+					.map(item -> {
+						double price = item.getProduct().getProductPrice();
+						double tax = item.getProduct().getProductType().getTax();
+						int qty = item.getQuantity();
+						double totalPrice = (price*qty)+(tax/100)*qty*price;
+						return new DisplayItem(item.getProduct(), qty, item.getProduct().getProductType().getType(), price, tax, totalPrice);
+					}).toList();
+			double wholePrice = display.stream()
+				.map(DisplayItem::getWholePrice)
+				.reduce((a, b) -> a + b).orElse(null);
+					
+			view.addObject("total", wholePrice);
+			view.addObject("products", display);
+		}
+		return view;
+		
+	}	
+	
+	@RequestMapping("/seeCart")
+	public ModelAndView getCartPage(@SessionAttribute("user") User user) {
+		ModelAndView view = new ModelAndView("ShoppingCart");
+		Collection<ShoppingBasketItem> prodList = basketService.getShoppingBasket(user);
+		
+		if(!prodList.isEmpty()) {
+			Collection<DisplayItem> display = prodList.stream()
+					.map(item -> {
+						double price = item.getProduct().getProductPrice();
+						double tax = item.getProduct().getProductType().getTax();
+						int qty = item.getQuantity();
+						double totalPrice = (price*qty)+(tax/100)*qty*price;
+						return new DisplayItem(item.getProduct(), qty, item.getProduct().getProductType().getType(), price, tax, totalPrice);
+					}).toList();
+			double wholePrice = display.stream()
+				.map(DisplayItem::getWholePrice)
+				.reduce((a, b) -> a + b).orElse(null);
+					
+			view.addObject("total", wholePrice);
+			view.addObject("products", display);
+		}
+		return view;
+	}
 
 }

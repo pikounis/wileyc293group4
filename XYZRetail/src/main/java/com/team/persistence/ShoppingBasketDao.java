@@ -32,6 +32,10 @@ public interface ShoppingBasketDao extends JpaRepository<ShoppingBasketItem, Int
 	@Modifying
 	public int deleteByUser(User user);
 	
+	@Transactional
+	@Modifying
+	public int deleteByUserAndProduct(User user, Product product);
+	
 	public ShoppingBasketItem findByProduct(Product product);
 
 }
