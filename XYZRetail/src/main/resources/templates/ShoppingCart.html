@@ -4,11 +4,6 @@
 	<meta charset="UTF-8">
 	<title>Shopping cart</title>
 	<link th:href="@{/styles/shoppingCart.css}" rel="stylesheet">
-	<style>
-	.hidden {
-		display: none;
-	}	
-	</style>
 </head>
 <body>
 	<div class="Cart-Container">
@@ -41,11 +36,9 @@
 				</td>
 			</tr>
 		</table>
-		<div class="totals">
-			<p th:text="${message}"></p><br><br>
-			<p th:if="${total!=null}" th:text="'Total: ' + ${#numbers.formatCurrency(total)}"></p>
-		</div>
 		<div class="footer">
+			<p th:text="${message}"></p><br><br>
+			<p class="total" th:if="${total!=null}" th:text="'Total: ' + ${#numbers.formatCurrency(total)}"></p>
 			<a href="./shopMenu">Back to the menu</a><br></br>
 			<a th:if="${products!=null}" href="./checkout">Checkout</a>
 		</div>

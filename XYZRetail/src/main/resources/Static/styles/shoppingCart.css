@@ -1,8 +1,4 @@
 @charset "ISO-8859-1";
-/*
-*{
-	border: 2px solid yellow;
-}*/
 
 body{
 	margin: 0;
@@ -63,23 +59,18 @@ h5{
 
 
 
-.totals{
-	color: red;
-  	border: 2px solid yellow;
-  	display: flex-end;
-	bottom: 150px;
-	width: 87%;
-	text-align: right;
+.total{
+	font-size: 20px;
+	font-weight: bold;
 }
 
 .footer{
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 5% 5%;
+	padding: 5% 4%;
 	position:absolute;
   	bottom:0;	
-  	border: 2px solid red;
   	margin: auto;
   	height: 2%;
 	width: 90%;
