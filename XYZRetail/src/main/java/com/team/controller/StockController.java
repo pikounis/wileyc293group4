@@ -218,6 +218,7 @@ public class StockController {
 				view.setViewName("ShoppingCart");
 			}
 		} catch (OutOfStockException e) {
+			e.printStackTrace();
 			view.addObject("message", "there was a problem with the order");
 			view.setViewName("ShoppingCart");
 		}
@@ -307,7 +308,6 @@ public class StockController {
 					.reduce((a, b) -> a + b).orElse(null);
 				dord.setTotal(wholePrice);
 				coll.add(dord);
-				view.addObject("total"+Integer.toString(i), wholePrice);
 			}
 			
 		}
@@ -315,5 +315,36 @@ public class StockController {
 			view.addObject("ordlist", coll);
 		}
 		return view;
+	}
+	
+	@RequestMapping("/emptyCart")
+	public ModelAndView emptyBasket(@SessionAttribute("user") User user) {
+		ModelAndView view = new ModelAndView("ShoppingCart");
+		if(basketService.emptyBasket(user)) {
+			view.addObject("message", "All products removed!");
+		} else {
+			view.addObject("message", "There was a problem removing the products");
+		}
+		
+		Collection<ShoppingBasketItem> prodList = basketService.getShoppingBasket(user);
+		
+		if(!prodList.isEmpty()) {
+			Collection<DisplayItem> display = prodList.stream()
+					.map(item -> {
+						double price = item.getProduct().getProductPrice();
+						double tax = item.getProduct().getProductType().getTax();
+						int qty = item.getQuantity();
+						double totalPrice = (price*qty)+(tax/100)*qty*price;
+						return new DisplayItem(item.getProduct(), qty, item.getProduct().getProductType().getType(), price, tax, totalPrice);
+					}).toList();
+			double wholePrice = display.stream()
+				.map(DisplayItem::getWholePrice)
+				.reduce((a, b) -> a + b).orElse(null);
+					
+			view.addObject("total", wholePrice);
+			view.addObject("products", display);
+		}
+		return view;
+		
 	}
 }

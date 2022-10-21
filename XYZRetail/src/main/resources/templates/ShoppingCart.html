@@ -4,13 +4,18 @@
 	<meta charset="UTF-8">
 	<title>Shopping cart</title>
 	<link th:href="@{/styles/shoppingCart.css}" rel="stylesheet">
+	<style>
+	.hidden {
+		display: none;
+	}	
+	</style>
 </head>
 <body>
 	<div class="Cart-Container">
 		<div class="header">
 			<h1>XYZ Retail</h1>
 			<h4 th:text="${session.user.username} + '\' shopping cart'">Your cart</h4>
-			<h5>Remove all</h5>
+			<a href="./emptyCart">Remove all</a>
 		</div>		
 		<table>
 			<tr>
