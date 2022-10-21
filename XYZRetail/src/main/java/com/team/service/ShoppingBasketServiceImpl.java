@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.team.entity.Product;
 import com.team.entity.ShoppingBasketItem;
 import com.team.entity.User;
 import com.team.exceptions.NegativeInputException;
@@ -47,11 +48,13 @@ public class ShoppingBasketServiceImpl implements ShoppingBasketService {
 	}
 
 	@Override
-	public boolean removeProductfromBasket(int id) {
+	public boolean removeProductfromBasket(User user, Product product) {
 		try {	
-			shoppingBasketDao.deleteById(id);
-			// Here we also need to add product back in stock
-			return true;
+			int rows = shoppingBasketDao.deleteByUserAndProduct(user, product);
+			if (rows>0)
+				return true;
+			else
+				return false;
 		} catch (Exception e){
 			return false;
 		}

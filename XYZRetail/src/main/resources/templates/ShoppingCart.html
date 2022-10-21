@@ -4,7 +4,27 @@
 <meta charset="UTF-8">
 <title>Shopping cart</title>
 <link th:href="@{/styles/XYZstyle.css}" rel="stylesheet">
+<style>
+div.table 
+{
+    display: table;
+    margin: 5px;
+}
+form.tr, div.tr
+{
+    display: table-row;
+    margin: 5px;
+}
+span.td
+{
+    display: table-cell;
+    padding: 8px;
+}
 
+.hidden {
+	display: none;
+}
+</style>
 </head>
 <body>
 
@@ -18,18 +38,28 @@
 			<th>Price</th>
 			<th>Tax</th>
 			<th>Quantity</th>
+			<th>Total price</th>
 		</tr>
-		<tr th:if="${products}!=null" th:each="prod : ${products}">
+		<tr th:if="${products!=null}" th:each="prod : ${products}">
 			<td th:text="${prod.product.productName}"></td>
 			<td th:text="${prod.product.productType.type}"></td>
-			<td th:text="${prod.product.productPrice}"></td>
-			<td th:text="${prod.product.productType.tax}"></td>
+			<td th:text="'£'+${prod.product.productPrice}"></td>
+			<td th:text="${prod.product.productType.tax}+ '%'"></td>
 			<td th:text="${prod.quantity}"></td>
+			<td th:text="${#numbers.formatCurrency(prod.wholePrice)}"></td>
+			<td>
+				<form th:action="@{./removeProdFromCart}" method="post">
+				<input type="text" class="hidden" name="id" th:value="${prod.product.productName}"/>
+				<input type="submit" value="Remove from cart">
+				</form>
+			</td>
 		</tr>
 	</table>
+<p th:text="${message}"></p><br><br>
 
+<p th:if="${total!=null}" th:text="'Total: ' + ${#numbers.formatCurrency(total)}"></p> <br><br>
 <a href="./shopMenu">Back to the menu</a><br></br>
-<a href="./checkout">Checkout</a>
+<a th:if="${products!=null}" href="./checkout">Checkout</a>
 
 </body>
 </html>
