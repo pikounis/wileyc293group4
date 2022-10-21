@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -72,11 +73,19 @@ public class UserController {
 		return modelAndView;
 	}
 	
+	@RequestMapping("/orderHistory")
+	public ModelAndView orderHistory(@SessionAttribute("user") User user) {
+		return new ModelAndView("orderHistory");
+	}
+	
+	
 	@RequestMapping("/setAdmin")
-	public ModelAndView makeAdmin(@ModelAttribute("user") User user) {
+	public ModelAndView makeAdmin(@SessionAttribute("user") User user) {
 		userService.setAdmin(user, true);
 		return new ModelAndView("ShopMenu");
 	}
+	
+	
 	
 	
 	

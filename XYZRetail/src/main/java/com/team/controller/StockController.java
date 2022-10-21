@@ -278,5 +278,4 @@ public class StockController {
 		}
 		return view;
 	}
-
 }
