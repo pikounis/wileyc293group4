@@ -12,4 +12,5 @@ public interface OrderService {
 	
 	boolean addProductToOrder(OrderItem item);
 	boolean purchaseBasket(User user, Collection<ShoppingBasketItem> items) throws OutOfStockException;
+	Collection<OrderItem> getOrderNFromIt(User user, int orderId);
 }

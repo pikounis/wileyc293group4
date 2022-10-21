@@ -1,5 +1,6 @@
 package com.team.controller;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team.entity.DisplayItem;
+import com.team.entity.DisplayOrder;
+import com.team.entity.OrderItem;
 import com.team.entity.Product;
 import com.team.entity.ShoppingBasketItem;
 import com.team.entity.StockItem;
@@ -275,6 +278,41 @@ public class StockController {
 					
 			view.addObject("total", wholePrice);
 			view.addObject("products", display);
+		}
+		return view;
+	}
+	
+	@RequestMapping("/orderHistory")
+	public ModelAndView orderHistory(@SessionAttribute("user") User user) {
+		ModelAndView view = new  ModelAndView("orderHistory");
+		int lastOrder = user.getOrderNumber();
+		Collection<DisplayOrder> coll = new ArrayList<DisplayOrder>();
+		
+		for (int i=0; i<lastOrder; i++) {
+			Collection<OrderItem> prodList = orderService.getOrderNFromIt(user, i);
+			
+			if(!prodList.isEmpty()) {
+				DisplayOrder dord = new DisplayOrder();
+				dord.setProdList(prodList.stream()
+						.map(item -> {
+							double price = item.getProduct().getProductPrice();
+							double tax = item.getProduct().getProductType().getTax();
+							int qty = item.getQuantity();
+							double totalPrice = (price*qty)+(tax/100)*qty*price;
+							return new DisplayItem(item.getProduct(), qty, item.getProduct().getProductType().getType(), price, tax, totalPrice);
+						}).toList());
+				
+				double wholePrice = dord.getProdList().stream()
+					.map(DisplayItem::getWholePrice)
+					.reduce((a, b) -> a + b).orElse(null);
+				dord.setTotal(wholePrice);
+				coll.add(dord);
+				view.addObject("total"+Integer.toString(i), wholePrice);
+			}
+			
+		}
+		if (!coll.isEmpty()) {
+			view.addObject("ordlist", coll);
 		}
 		return view;
 	}

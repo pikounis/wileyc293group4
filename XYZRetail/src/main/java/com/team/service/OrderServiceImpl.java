@@ -62,13 +62,15 @@ public class OrderServiceImpl implements OrderService {
 		.map(item -> addProductToOrder(new OrderItem(user, user.getOrderNumber(), item.getProduct(), item.getQuantity())))
 		.allMatch(t -> t == true);
 		
-		if (saveAttempt) {
-			
-		}
-		
 		return saveAttempt;
 			
 	}
+
+	@Override
+	public Collection<OrderItem> getOrderNFromIt(User user, int orderId) {
+		return orderDao.getByUserAndOrderId(user, orderId);
+	}
+
 
 
 	
