@@ -12,8 +12,33 @@
 <hr>
 <h4>Order History</h4>
 
+<!--<p th:if="${ordlist=null}" th:text="No orders yet"></p>-->
+<div th:if="${ordlist!=null}" th:each="order : ${ordlist}">
+	<table th:if="${order.prodList != null}">
+			<tr>
+				<th>Product Name</th>
+				<th>Product Type</th>
+				<th>Price</th>	
+				<th>Tax</th>			
+				<th>Quantity</th>
+				<th>Total Price</th>
+			</tr>
+			<tr th:each="prod : ${order.prodList}">
+				<td th:text="${prod.product.productName}"></td>
+				<td th:text="${prod.product.productType.type}"></td>
+				<td th:text="'£'+${prod.product.productPrice}"></td>
+				<td th:text="${prod.product.productType.tax}+ '%'"></td>
+				<td th:text="${prod.quantity}"></td>
+				<td th:text="${#numbers.formatCurrency(prod.wholePrice)}"></td>
+				
+
+		</table>
+	<p th:if="${order.total != null}"
+		th:text="'Total: ' + ${#numbers.formatCurrency(order.total)}">
+	</p><br><br>
+</div>
 
 
-<a href="./storeMenu">Back to the menu</a>
+<a href="./shopMenu">Back to the menu</a>
 </body>
 </html>

@@ -1,5 +1,7 @@
 package com.team.controller;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team.entity.OrderItem;
 import com.team.entity.User;
 import com.team.service.UserService;
 
@@ -72,12 +75,6 @@ public class UserController {
 		}
 		return modelAndView;
 	}
-	
-	@RequestMapping("/orderHistory")
-	public ModelAndView orderHistory(@SessionAttribute("user") User user) {
-		return new ModelAndView("orderHistory");
-	}
-	
 	
 	@RequestMapping("/setAdmin")
 	public ModelAndView makeAdmin(@SessionAttribute("user") User user) {
