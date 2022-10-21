@@ -10,51 +10,29 @@ import com.team.entity.Types;
 import com.team.persistence.ProductDAO;
 import com.team.persistence.TypesDao;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 @Service
 public class ProductServiceImpl implements ProductService {
-	
+
 	@Autowired
 	ProductDAO productDao;
 	
 	@Autowired
 	TypesDao typesDao;
-	
-	/*
-	@Override
-	public Collection<Product> getAllProducts() {
-		return productDao.findAll();
-	}
 
-	@Override
-	public boolean editProductById(int id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-	@Override
-	public boolean insertNewProduct(Product product) {
-		Types type = typesDao.findById(product.getProductType().getType()).orElse(null);
-		try {
-			int rows = productDao.insertProduct(product.getProductName(), product.getProductPrice(), type);
-			if (rows > 0) 
-				return true;
-			else
-				return false;
-		} catch (Exception e){
-			return false;
-		}
-			
-	} */
 	
 	@Override
 	public boolean saveProduct(Product product) {
-		if(!product.getProductName().equals("")) {
-					try {
-			productDao.save(product);
-		}catch (Exception e) {
-			return false;
-		}
-		return true;
+		if(product != null && !product.getProductName().equals("")) {
+			try {
+				productDao.save(product);
+			}catch (Exception e) {
+				return false;
+			}
+			return true;
 		}
 		return false;
 	}
