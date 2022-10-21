@@ -1,5 +1,8 @@
 @charset "ISO-8859-1";
-
+/*
+*{
+	border: 2px solid yellow;
+}*/
 
 body{
 	margin: 0;
@@ -58,6 +61,17 @@ h5{
 	border-bottom: 1px solid #E44C4C;
 }
 
+
+
+.totals{
+	color: red;
+  	border: 2px solid yellow;
+  	display: flex-end;
+	bottom: 150px;
+	width: 87%;
+	text-align: right;
+}
+
 .footer{
 	display: flex;
 	justify-content: space-between;
@@ -65,17 +79,19 @@ h5{
 	padding: 5% 5%;
 	position:absolute;
   	bottom:0;	
-  	
+  	border: 2px solid red;
   	margin: auto;
+  	height: 2%;
 	width: 90%;
 }
 
-a{
+a, input{
 	color: white;
 	border-radius: 10%;
 	border: 2px solid #E8BA15;
 	text-decoration: none;
 	padding: 2px 10px;
 	background-color: #695409;
+	cursor: pointer;
 }
 
