@@ -9,7 +9,7 @@ public interface StockItemService {
 	
 	public Collection<StockItem> getAllStockItems(); 
 	public boolean insertNewStockItem(StockItem stock);
-	public boolean deleteStockById(Product product);
+	public boolean deleteStockById(String id);
 	public StockItem getProductById(Product product);
 
 }

@@ -41,3 +41,23 @@ th{
 	border-top: none;
 	color: #E8BA15
 }
+
+div.table 
+{
+    display: table;
+    margin: 5px;
+}
+form.tr, div.tr
+{
+    display: table-row;
+    margin: 5px;
+}
+span.td
+{
+    display: table-cell;
+    padding: 8px;
+}
+
+.hidden {
+	display: none;
+}
