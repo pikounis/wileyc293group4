@@ -21,6 +21,7 @@ input, a{
 	text-decoration: none;
 	padding: 2px 10px;
 	background-color: #695409;
+	cursor: pointer;
 }
 
 table{

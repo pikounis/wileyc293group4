@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Shopping cart</title>
-<link th:href="@{/styles/XYZstyle.css}" rel="stylesheet">
-<style>
+<link th:href="@{/styles/shoppingCart.css}" rel="stylesheet">
+
+<!-- >style>
 div.table 
 {
     display: table;
@@ -24,9 +25,38 @@ span.td
 .hidden {
 	display: none;
 }
-</style>
+</style-->
 </head>
 <body>
+	<div class="Cart-Container">
+		<div class="header">
+			<h1>XYZ Retail</h1>
+			<h4 th:text="${session.user.username} + '\' shopping cart'">Your cart</h4>
+			<h5>Remove all</h5>
+		</div>		
+		<table>
+			<tr>
+				<th class="title1">Product Name</th>
+				<th>Type</th>
+				<th>Price</th>
+				<th>Tax (%)</th>
+				<th>Quantity</th>
+			</tr>
+			<tr th:if="${products}!=null" th:each="prod : ${products}">
+				<td class="title" th:text="${prod.product.productName}"></td>
+				<td th:text="${prod.product.productType.type}"></td>
+				<td th:text="${prod.product.productPrice}"></td>
+				<td th:text="${prod.product.productType.tax}"></td>
+				<td th:text="${prod.quantity}"></td>
+			</tr>
+		</table>
+		<div class="footer">
+			<a href="./shopMenu">Back to the menu</a>
+			<a href="./checkout">Checkout</a>
+		</div>
+		
+	</div>
+=======
 
 <h1>XYZ Retail</h1>
 <hr>
@@ -61,5 +91,6 @@ span.td
 <a href="./shopMenu">Back to the menu</a><br></br>
 <a th:if="${products!=null}" href="./checkout">Checkout</a>
 
+>>>>>>> 914507d67dd322aee5408748f5f24439f280bf62
 </body>
 </html>
